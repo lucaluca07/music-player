@@ -1,0 +1,60 @@
+.footer {
+  background: #fff;
+  flex: 0 0 60px;
+  .play-bar {
+    display: flex;
+    padding: 10px;
+    height: 60px;
+  }
+  .song-info,
+  .mode {
+    flex: 1;
+  }
+  .song-info {
+    display: flex;
+    p {
+      margin: 0;
+    }
+    .song {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 2px 0;
+      margin-left: 10px;
+    }
+    .top {
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      .name {
+        color: #4c4c4c;
+      }
+      .split {
+        margin: 0 8px;
+        color: #909090;
+      }
+      .artists {
+        font-size: 12px;
+        color: #909090;
+      }
+    }
+    .time {
+      font-size: 12px;
+      color: #b2b2b2;
+      .split {
+        margin: 0 4px;
+      }
+    }
+  }
+  .cover {
+    height: 40px;
+    width: 40px;
+    overflow: hidden;
+    border-radius: 4px;
+    object-fit: cover;
+  }
+  .mode {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

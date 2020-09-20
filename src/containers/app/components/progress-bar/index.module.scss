@@ -1,0 +1,29 @@
+.progress-bar {
+  height: 12px;
+  padding: 5px 0;
+  background: #f5f5f5;
+  background-clip: content-box;
+  margin: -5px 0;
+  .progress {
+    height: 2px;
+    background: #c5473a;
+    position: relative;
+    &::after {
+      content: '';
+      height: 12px;
+      width: 12px;
+      border-radius: 50%;
+      background: #c5473a;
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translate(50%, -50%);
+    }
+  }
+  &:hover {
+    .progress::after {
+      display: block;
+    }
+  }
+}

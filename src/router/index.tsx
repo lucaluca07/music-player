@@ -1,11 +1,13 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 
 const RouterMap = () => {
   return (
-    <Switch>
-      <Route path='/' component={() => <div>index</div>} />
-    </Switch>
+    <Router>
+      <Switch>
+        <Route path='/' component={() => <div>index</div>} />
+      </Switch>
+    </Router>
   );
 };
 
