@@ -3,4 +3,24 @@
   padding: 0 50px;
   display: flex;
   align-items: center;
+  .prev {
+    margin: 0 24px 0 34px;
+    color: #c3463a;
+  }
+  .next {
+    margin: 0 34px 0 24px;
+    color: #c3463a;
+  }
+  .play {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+    background: #c3463a;
+    border-radius: 50%;
+    :global .icon-play {
+      padding-left: 4px;
+    }
+  }
 }

@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import App from './containers/app';
 import store from './store';
 import * as serviceWorker from './serviceWorker';
+import './assets/styles/iconfont.css'
 import './index.css';
 
 ReactDOM.render(
