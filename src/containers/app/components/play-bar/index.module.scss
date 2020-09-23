@@ -53,6 +53,10 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    color: #4c4c4c;
+    .lyric {
+      color: #c3463a;
+    }
     :global .iconfont {
       margin-right: 16px;
     }

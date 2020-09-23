@@ -1,0 +1,19 @@
+.header {
+  flex: 0 0 50px;
+  
+  display: flex;
+  .left {
+    display: flex;
+    flex: 0 0 200px;
+    justify-content: flex-end;
+    align-items: center;
+    background: #f6f6f6;
+  }
+  .right {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    align-items: center;
+    background: #f9f9f9;
+  }
+}
