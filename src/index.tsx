@@ -5,7 +5,7 @@ import App from './containers/app';
 import store from './store';
 import * as serviceWorker from './serviceWorker';
 import './assets/styles/iconfont.css'
-import './index.css';
+import './assets/styles/normalize.css';
 
 ReactDOM.render(
   <React.StrictMode>

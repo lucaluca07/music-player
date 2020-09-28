@@ -1,0 +1,26 @@
+.input-wrapper {
+  display: inline-block;
+  border-radius: 12px;
+  overflow: hidden;
+  height: 24px;
+  background-color: #ececec;
+  display: flex;
+  align-items: center;
+  color: #bbb;
+  font-size: 12px;
+}
+.input {
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  position: relative;
+  height: 100%;
+  border: none;
+  transition: all 0.3s;
+  background-color: transparent;
+  font-size: 12px;
+  line-height: 24px;
+  &:focus {
+    outline: 0;
+  }
+}

@@ -1,20 +1,24 @@
 import React from "react";
+import Icon from "../../../../components/icon";
+import Input from "../../../../components/input";
 import styles from "./index.module.scss";
 
 const Header: React.FC = () => {
-  return <header className={styles["header"]}>
-    <div className={styles["left"]}>
-      <div>后退</div>
-      <div>前进</div>
-    </div>
-    <div className={styles["right"]}>
-      <div>搜索</div>
-      <div>设置</div>
-      <div>私信</div>
-      <div>换肤</div>
-      <div>mini</div>
-    </div>
-  </header>;
+  return (
+    <header className={styles["header"]}>
+      <div className={styles["left"]}>
+        <Icon type="backward" />
+        <Icon type="forward" />
+      </div>
+      <div className={styles["right"]}>
+        <Input style={{ marginRight: 16 }} placeholder="搜索" addonBefore={<Icon type="search" />} />
+        <Icon type="setting" />
+        <Icon type="mail" />
+        <Icon type="clothes" />
+        <Icon type="reduce" />
+      </div>
+    </header>
+  );
 };
 
 export default Header;
