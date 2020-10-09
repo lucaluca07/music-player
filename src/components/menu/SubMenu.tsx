@@ -14,6 +14,7 @@ const SubMenu: React.FC<SubMenuProps> = ({
   eventKey,
   arrowDisabled,
 }) => {
+  const initRef = useRef(false)
   const { state, dispatch } = useContext(menuContext);
   const [visible, setVisible] = useState(state?.openKeys?.includes(eventKey));
   const isOpen = useMemo(() => {
@@ -23,12 +24,14 @@ const SubMenu: React.FC<SubMenuProps> = ({
   const menuRef = useRef<HTMLUListElement>(null);
   // 缓慢展开收起的动画
   useEffect(() => {
-    if (arrowDisabled) return;
+    if (arrowDisabled || !menuRef.current || !initRef.current) {
+      initRef.current = true;
+      return;
+    }
     setTimeout(() => {
       setVisible(isOpen);
       menuRef?.current?.setAttribute("style", "");
     }, 300);
-    if (!menuRef.current) return;
     const el = menuRef.current;
     el.style.display = "block";
     el.style.height = "auto";
