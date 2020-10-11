@@ -1,7 +1,7 @@
-import ErrorBoundary from "@/components/error-boundary";
-import React, { lazy, Suspense } from "react";
-import { Route, Switch } from "react-router-dom";
-import routes, { RouteProps } from "./routes";
+import ErrorBoundary from '@/components/error-boundary';
+import React, { lazy, Suspense } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import routes, { RouteProps } from './routes';
 
 const RouterMap = () => {
   return (
