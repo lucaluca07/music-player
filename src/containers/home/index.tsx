@@ -1,5 +1,10 @@
 import * as React from 'react';
 import Carousel from '@/components/carousel';
+import FM from './components/fm';
+import SongList from './components/song-list';
+import Songs from './components/songs';
+import MV from './components/mvs';
+import RecommendMV from './components/recommend-mv';
 
 const list = [
   'http://p1.music.126.net/0DXSM3X696CO-N4DXobvaQ==/109951165378378923.jpg?param=1080y400',
@@ -12,7 +17,11 @@ const Home: React.FC = () => {
   return (
     <div>
       <Carousel data={list} />
-      Home
+      <SongList />
+      <MV />
+      <Songs />
+      <RecommendMV />
+      <FM />
     </div>
   );
 };

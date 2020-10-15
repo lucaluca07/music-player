@@ -1,0 +1,10 @@
+.title {
+  font-size: 16px;
+  color: #333;
+  &-type-link {
+    cursor: pointer;
+    &:hover {
+      color: #000;
+    }
+  }
+}
