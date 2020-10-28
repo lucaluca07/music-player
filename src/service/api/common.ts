@@ -1,8 +1,12 @@
-const api = [
+import { ApiProps } from "./type";
+
+const api: ApiProps[] = [
   {
-    name: '',
-    url: '',
-    method: 'get',
+    name: "",
+    config: {
+      url: "",
+      method: "get",
+    },
     options: {},
     success: () => {},
     faild: () => {},
