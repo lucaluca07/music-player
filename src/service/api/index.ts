@@ -1,3 +1,4 @@
-import common from './common';
+import * as common from './common';
+import * as song from './song';
 
-export default [...common];
+export default {...common, ...song };

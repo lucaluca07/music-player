@@ -1,16 +1,10 @@
-import { ApiProps } from "./type";
+import request from "../request";
+export interface IBanner {
+  imageUrl: string;
+  typeTitle: string;
+}
 
-const api: ApiProps[] = [
-  {
-    name: "",
-    config: {
-      url: "",
-      method: "get",
-    },
-    options: {},
-    success: () => {},
-    faild: () => {},
-  },
-];
-
-export default api;
+export const getBanner = () =>
+  request<{ banners: IBanner[] }>({ url: "/banner" }).then(
+    (data) => data.banners
+  );

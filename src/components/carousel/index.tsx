@@ -3,9 +3,10 @@ import classnames from "classnames";
 import Button from "../button";
 import "./index.scss";
 import Icon from "../icon";
+import { IBanner } from "@/service/api/common";
 
 interface IProps {
-  data: string[];
+  data: IBanner[];
 }
 
 const baseStyle = {
@@ -31,10 +32,10 @@ const getSlideStyle = (i: number, index: number, len: number) => {
   }
   // left
   if (i < index) {
-    const offset = i + 1 - index;
+    const offset = index - i - 1;
     return {
-      left: offset * 50,
-      zIndex: 999 + offset,
+      left: offset * 540 * 0.2,
+      zIndex: 999 - offset,
       ...baseStyle,
     };
   }
@@ -42,7 +43,7 @@ const getSlideStyle = (i: number, index: number, len: number) => {
   if (i > index) {
     const offset = index + 1 - i;
     return {
-      right: offset * 50,
+      right: offset * 300,
       zIndex: 999 + offset,
       ...baseStyle,
     };
@@ -74,9 +75,9 @@ const Carousel: React.FC<IProps> = ({ data }) => {
               className={classnames("carousel-slide", {
                 "carousel-slide-active": index === i,
               })}
-              key={item}
+              key={item.imageUrl}
             >
-              <img alt="" src={item} />
+              <img alt="" src={item.imageUrl} />
             </li>
           );
         })}
@@ -94,7 +95,7 @@ const Carousel: React.FC<IProps> = ({ data }) => {
               className={classnames("carousel-pagination-bullet", {
                 "carousel-pagination-bullet-active": index === i,
               })}
-              key={item}
+              key={item.imageUrl}
             ></li>
           );
         })}
