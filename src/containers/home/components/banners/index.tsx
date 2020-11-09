@@ -1,21 +1,16 @@
-import React, { useCallback, useEffect, useMemo } from "react";
-import services from "@/service";
+import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setBanners } from "@/reducer/home";
+import { getBanner } from "@/reducer/home";
 import { RootState } from "@/reducer";
 import Carousel from "@/components/carousel";
 
 const Banners: React.FC = () => {
   const dispatch = useDispatch();
   const banners = useSelector((state: RootState) => state.home.banners);
-  const getBanner = useCallback(async () => {
-    const banner = await services.getBanner();
-    dispatch(setBanners(banner));
-  }, [dispatch]);
+
   useEffect(() => {
-    getBanner();
-    services.getPersonalized({ limit: 9 })
-  }, [getBanner]);
+    dispatch(getBanner());
+  }, [dispatch]);
 
   const data = useMemo(
     () =>

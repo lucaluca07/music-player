@@ -1,0 +1,42 @@
+.song-list {
+  .list {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+    .item {
+      flex: 0 0 calc(25% - 13.5px);
+      list-style: none;
+      overflow: hidden;
+      margin: 0 18px 44px 0;
+      font-size: 13px;
+    }
+    .item:nth-child(4n) {
+      margin-right: 0;
+    }
+  }
+  .cover {
+    border-radius: 4px;
+    margin-bottom: 8px;
+    overflow: hidden;
+    position: relative;
+    &-img {
+      width: 100%;
+    }
+    &-play-btn {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #eee;
+      display: none;
+    }
+    &:hover {
+      .cover-play-btn {
+        display: block;
+      }
+    }
+  }
+}

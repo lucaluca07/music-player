@@ -3,7 +3,6 @@ import FM from "./components/fm";
 import SongList from "./components/song-list";
 import Songs from "./components/songs";
 import MV from "./components/mvs";
-import RecommendMV from "./components/recommend-mv";
 import Banners from "./components/banners";
 
 const Home: React.FC = () => {
@@ -11,9 +10,9 @@ const Home: React.FC = () => {
     <div>
       <Banners />
       <SongList />
-      <MV />
+      <MV type={"exclusive"} />
       <Songs />
-      <RecommendMV />
+      <MV type={"personalized"} />
       <FM />
     </div>
   );
