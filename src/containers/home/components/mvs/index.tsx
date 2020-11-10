@@ -3,7 +3,7 @@ import Title from "@/containers/app/components/title";
 import { useDispatch, useSelector } from "react-redux";
 import { getExclusiveMV, getPersonalizedMV } from "@/reducer/home";
 import { RootState } from "@/reducer";
-import Button from "@/components/button";
+// import Button from "@/components/button";
 import Image from "@/components/image";
 
 import styles from "./style.module.scss";
@@ -35,7 +35,6 @@ const FM: React.FC<{ type: "personalized" | "exclusive" }> = ({ type }) => {
                 alt={song.name}
                 ratio={95 / 170}
               />
-              <Button className={styles["cover-play-btn"]}>I</Button>
             </div>
             <span>{song.name}</span>
           </li>

@@ -1,5 +1,5 @@
 import React from "react";
-import FM from "./components/fm";
+// import FM from "./components/fm";
 import SongList from "./components/song-list";
 import Songs from "./components/songs";
 import MV from "./components/mvs";
@@ -13,7 +13,7 @@ const Home: React.FC = () => {
       <MV type={"exclusive"} />
       <Songs />
       <MV type={"personalized"} />
-      <FM />
+      {/* <FM /> */}
     </div>
   );
 };

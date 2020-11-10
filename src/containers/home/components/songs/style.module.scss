@@ -1,0 +1,48 @@
+.new-songs {
+  .songs {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    height: 400px;
+    flex-wrap: wrap;
+  }
+  .song {
+    list-style: none;
+    flex: 0 0 20%;
+    display: flex;
+    padding: 10px 0;
+  }
+  .cover {
+    width: 60px;
+    height: 60px;
+    border-radius: 4px;
+    overflow: hidden;
+    img {
+      width: 100%;
+    }
+  }
+  .index {
+    line-height: 60px;
+    font-size: 12px;
+    margin: 0 16px;
+    color: #999;
+  }
+  .info {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .name {
+    font-size: 14px;
+    .alias {
+      color: #999;
+    }
+    margin-bottom: 8px;
+  }
+  .artists {
+    font-size: 12px;
+    color: #999;
+  }
+}

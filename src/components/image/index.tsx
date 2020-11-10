@@ -16,15 +16,16 @@ const Img: FC<React.ImgHTMLAttributes<{}> & IProps> = ({
   ...props
 }) => {
   const [width, setWidth] = useState<number | undefined>();
-  const ref = useRef<HTMLImageElement>(null)
+  const ref = useRef<HTMLImageElement>(null);
   useEffect(() => {
     const width = ref.current?.width;
-    setWidth(width)
-  }, [])
+    setWidth(width);
+  }, []);
   return (
     <img
       ref={ref}
       className={cx("image", className)}
+      onLoad={() => setWidth(undefined)}
       style={{
         width: width,
         height: width && width * ratio,

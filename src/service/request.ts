@@ -1,6 +1,6 @@
 // import store from "@/utils/store";
 import axios, { AxiosRequestConfig } from "axios";
-
+import qs from 'query-string'
 // 创建一个独立的axios实例
 const ajax = axios.create({
   // 设置baseUr地址,如果通过proxy跨域可直接填写base地址
@@ -9,6 +9,9 @@ const ajax = axios.create({
   timeout: 5 * 1000,
   // 如果用的JSONP，可以配置此参数带上cookie凭证，如果是代理和CORS不用设置
   withCredentials: true,
+  paramsSerializer: (params) => {
+    return qs.stringify(params, { arrayFormat: 'comma' });
+  },
 });
 // 请求拦截
 ajax.interceptors.request.use((config) => {
@@ -45,7 +48,7 @@ ajax.interceptors.response.use(
  * @param mock 本次是否请求mock而非线上
  * @param error 本次是否显示错误
  */
-function request <T>(
+function request<T>(
   config: AxiosRequestConfig,
   options?: { loading?: boolean; mock?: boolean; error?: boolean }
 ): Promise<T> {
@@ -53,9 +56,10 @@ function request <T>(
     if (config.method === "get") {
       config.params = config.data;
     }
+    console.log(config.params);
     ajax({ method: "get", ...config })
       .then((response) => {
-        const res = response.data
+        const res = response.data;
         // 处理返回函数
         if (res.code === 200) {
           resolve(res);

@@ -11,6 +11,26 @@
       margin: 0 18px 44px 0;
       font-size: 13px;
     }
+    .recommend {
+      .cover::after {
+        content: '根据您的音乐口味生成每日更新';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 8px;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        font-size: 12px;
+        line-height: 1.2;
+        display: none;
+      }
+      &:hover {
+        .cover::after {
+          display: block;
+        }
+      }
+    }
     .item:nth-child(5n) {
       margin-right: 0;
     }
@@ -30,8 +50,17 @@
       width: 30px;
       height: 30px;
       border-radius: 50%;
-      background: #eee;
+      background: rgba(255, 255, 255, 0.8);
       display: none;
+      line-height: 30px;
+      text-align: center;
+      border: none;
+      padding: 0;
+    }
+    .icon {
+      margin-left: 2px;
+      color: #c3463a;
+      font-size: 14px;
     }
     &:hover {
       .cover-play-btn {

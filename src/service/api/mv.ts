@@ -18,10 +18,11 @@ export interface ExclusiveMVProps {
   name: string;
 }
 // 独家放送 MV
-export const getExclusiveMV = (params: { limit: number }) =>
-  request<{ data: ExclusiveMVProps[] }>({ url: "/mv/exclusive/rcmd", params }).then(
-    (data) => (data.data || []).map(item => ({ picUrl: item.cover, ...item }))
-  );
+export const getExclusiveMV = (params: { limit: number; offset?: number }) =>
+  request<{ result: MVProps[] }>({
+    url: "/personalized/privatecontent/list",
+    params,
+  }).then((data) => data.result || []);
 
 // 推荐 MV
 export const getPersonalizedMV = () =>

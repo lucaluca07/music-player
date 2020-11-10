@@ -1,5 +1,5 @@
 import { IBanner } from "@/service/api/common";
-import { SongListProps } from "@/service/api/song";
+import { SongListProps, SongProps } from "@/service/api/song";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import services from "@/service";
 import { MVProps } from "@/service/api/mv";
@@ -9,6 +9,7 @@ interface HomeState {
   songList: SongListProps[];
   personalizedMV: MVProps[];
   exclusiveMV: MVProps[];
+  personalizedSong: SongProps[];
 }
 
 const initialState: HomeState = {
@@ -16,6 +17,7 @@ const initialState: HomeState = {
   songList: [],
   personalizedMV: [],
   exclusiveMV: [],
+  personalizedSong: [],
 };
 
 export const getBanner = createAsyncThunk("home/getBanner", async () => {
@@ -51,6 +53,13 @@ export const getPersonalizedSong = createAsyncThunk(
     return response;
   }
 );
+export const getPersonalizedProgram = createAsyncThunk(
+  "home/getPersonalizedProgram",
+  async () => {
+    const response = await services.getPersonalizedProgram();
+    return response;
+  }
+);
 
 const homeSlice = createSlice({
   name: "home",
@@ -82,6 +91,12 @@ const homeSlice = createSlice({
       action: PayloadAction<MVProps[]>
     ) => {
       state.exclusiveMV = action.payload;
+    },
+    [getPersonalizedSong.fulfilled.type]: (
+      state,
+      action: PayloadAction<SongProps[]>
+    ) => {
+      state.personalizedSong = action.payload;
     },
   },
 });
