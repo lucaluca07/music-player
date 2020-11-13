@@ -48,6 +48,11 @@
     overflow: hidden;
     border-radius: 4px;
     object-fit: cover;
+    background: url(../../../../assets/images/music_bg.png) center no-repeat#fafafa;
+    background-size: 80%;
+    .img {
+      width: 100%;
+    }
   }
   .mode {
     display: flex;

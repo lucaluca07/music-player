@@ -1,12 +1,14 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import services from "@/service";
-import store from "../store";
 
 interface Current {
   id: number;
   name: string;
+  dt: number;
   al: any;
   ar: any;
+  detail: any;
+  lyric: any;
 }
 interface CounterState {
   songs: Current[];
@@ -32,22 +34,16 @@ export const getPlayListSongs = createAsyncThunk(
   }
 );
 
-export const setCurrentSong = createAsyncThunk<
-  Current,
-  number,
-  { state: any }
->("song/setCurrentSong", async (id, thunkAPI) => {
-  const state = thunkAPI.getState();
-  const songs = state.song.songs;
-  const current = songs.find((song: any) => song.id === id);
-  const [detail, lyric] = await Promise.all([
-    services.getSongUrl({ id }),
-    services.getLyric({ id }),
-  ]);
-  // get url
-  // get 歌词
-  return current;
-});
+export const getCurrentDetail = createAsyncThunk(
+  "song/getCurrentDetail",
+  async (id: number) => {
+    const [detail, lyric] = await Promise.all([
+      services.getSongUrl({ id }), // url
+      services.getLyric({ id }), // 歌词
+    ]);
+    return { id, detail, lyric };
+  }
+);
 
 const initialState: CounterState = { songs: [], current: null };
 
@@ -57,15 +53,17 @@ const counterSlice = createSlice({
   reducers: {},
   extraReducers: {
     [getRecommedSongs.fulfilled.type]: (state, action) => {
+      const current = action.payload[0];
       state.songs = action.payload;
-      // state.current = action.payload[0];
+      state.current = current;
     },
     [getPlayListSongs.fulfilled.type]: (state, action) => {
+      const current = action.payload[0];
+      state.current = current;
       state.songs = action.payload;
-      store.dispatch(setCurrentSong(action.payload[0].id));
     },
-    [setCurrentSong.fulfilled.type]: (state, action) => {
-      state.current = action.payload;
+    [getCurrentDetail.fulfilled.type]: (state, action) => {
+      state.current = { ...state!.current, ...action.payload };
     },
   },
 });
