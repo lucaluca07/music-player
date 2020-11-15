@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import services from "@/service";
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import services from '@/service';
 
 interface Current {
   id: number;
@@ -7,7 +7,7 @@ interface Current {
   dt: number;
   al: any;
   ar: any;
-  detail: any;
+  url: any;
   lyric: any;
 }
 interface CounterState {
@@ -16,7 +16,7 @@ interface CounterState {
 }
 
 export const getRecommedSongs = createAsyncThunk(
-  "song/getRecommedSongs",
+  'song/getRecommedSongs',
   async () => {
     const response = await services.getRecommedSongs();
     return response;
@@ -24,7 +24,7 @@ export const getRecommedSongs = createAsyncThunk(
 );
 
 export const getPlayListSongs = createAsyncThunk(
-  "song/getPlayListSongs",
+  'song/getPlayListSongs',
   async ({ id, s }: { id: number; s?: number }) => {
     const response = await services.getPlaylistDetail({ id, s });
     const songs = await services.getSongDetail({
@@ -35,20 +35,20 @@ export const getPlayListSongs = createAsyncThunk(
 );
 
 export const getCurrentDetail = createAsyncThunk(
-  "song/getCurrentDetail",
+  'song/getCurrentDetail',
   async (id: number) => {
     const [detail, lyric] = await Promise.all([
       services.getSongUrl({ id }), // url
       services.getLyric({ id }), // 歌词
     ]);
-    return { id, detail, lyric };
+    return { id, url: (detail as any)?.[0]?.url, lyric };
   }
 );
 
 const initialState: CounterState = { songs: [], current: null };
 
 const counterSlice = createSlice({
-  name: "counter",
+  name: 'counter',
   initialState,
   reducers: {},
   extraReducers: {
