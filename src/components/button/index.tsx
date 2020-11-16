@@ -1,4 +1,4 @@
 import Button from './Button';
-import './style.less';
+import './style.scss';
 
 export default Button;

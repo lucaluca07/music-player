@@ -7,4 +7,30 @@
   background: #fdfdfd;
   z-index: 1001;
   box-shadow: -6px 0px 6px -4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 20px;
+    padding: 20px 0 10px;
+    border-bottom: 1px solid #eeeeed;
+    font-size: 12px;
+    .count {
+      color: #bbb;
+    }
+  }
+  .list {
+    flex: 1;
+    overflow-y: auto;
+    font-size: 12px;
+    padding: 0;
+  }
+  .empty {
+    font-size: 14px;
+    text-align: center;
+    padding-top: 30%;
+    color: #bbb;
+  }
 }

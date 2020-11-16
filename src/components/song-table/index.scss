@@ -1,0 +1,16 @@
+.song-table {
+  padding: 0;
+  .column {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    line-height: 34px;
+    padding: 0 20px;
+    &:nth-child(2n) {
+      background: #f8f8f7;
+    }
+    &:hover {
+      background: #eee;
+    }
+  }
+}

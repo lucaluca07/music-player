@@ -36,7 +36,7 @@ const PlayBar: React.FC = () => {
                 </span>
               </div>
               <div className={styles["time"]}>
-                <span>{msToTime(0)}</span>
+                <span>{msToTime(current?.currentTime ||0)}</span>
                 <span className={styles["split"]}>/</span>
                 <span>{msToTime(current?.dt || 0)}</span>
               </div>

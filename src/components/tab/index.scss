@@ -1,0 +1,25 @@
+.tab {
+  display: flex;
+  height: 30px;
+  align-items: center;
+  margin: 0 auto;
+  line-height: 30px;
+  padding: 0;
+  border-radius: 15px;
+  border: 1px solid #bbb;
+  overflow: hidden;
+  font-size: 14px;
+  &-panel {
+    height: 100%;
+    list-style: none;
+    padding: 0 25px;
+    border-radius: 15px;
+    &:not(.tab-panel-active):hover {
+      background-color: #f2f0f0;
+    }
+  }
+  &-panel-active {
+    background-color: #bbb;
+    color: #fff;
+  }
+}

@@ -8,6 +8,7 @@
     height: 2px;
     background: #c5473a;
     position: relative;
+    transition: all .3s;
     &::after {
       content: '';
       height: 12px;
