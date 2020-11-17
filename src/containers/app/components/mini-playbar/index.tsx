@@ -23,7 +23,7 @@ const PlayBar: React.FC = () => {
           <>
             <div className={styles["cover"]}>
               <img
-                src={`${current?.al?.picUrl}?param=50y50&quality=100`}
+                src={`${current?.album?.picUrl}?param=50y50&quality=100`}
                 alt=""
               />
             </div>
@@ -32,13 +32,13 @@ const PlayBar: React.FC = () => {
                 <p className={styles["name"]}>{current?.name}</p>
                 <p className={styles["split"]}>-</p>
                 <span className={styles["artists"]}>
-                  {current?.ar?.map((item: any) => item.name).join("/")}
+                  {current?.artists?.map((item: any) => item.name).join("/")}
                 </span>
               </div>
               <div className={styles["time"]}>
                 <span>{msToTime(current?.currentTime ||0)}</span>
                 <span className={styles["split"]}>/</span>
-                <span>{msToTime(current?.dt || 0)}</span>
+                <span>{msToTime(current?.duration || 0)}</span>
               </div>
             </div>
           </>

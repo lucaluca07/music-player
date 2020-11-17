@@ -4,11 +4,11 @@ import services from "@/service";
 interface Current {
   id: number;
   name: string;
-  dt: number;
-  al: any;
-  ar: any;
-  url: string;
-  lyric: any;
+  duration: number;
+  album: any;
+  artists: { name: string }[];
+  url?: string;
+  lyric?: any;
   currentTime?: number;
   status?: "play" | "pause";
 }
@@ -16,6 +16,18 @@ interface CounterState {
   songs: Current[];
   current: Current | null;
 }
+
+type Keys = keyof Current;
+
+type Foo<T extends Keys, P> = {
+  [key in T]: P;
+};
+
+type SongInfoPayloads = {
+  [K in Keys]: Foo<K, Current[K]>;
+};
+
+type SongInfoPayload = SongInfoPayloads[Keys];
 
 export const getRecommedSongs = createAsyncThunk(
   "song/getRecommedSongs",
@@ -55,18 +67,12 @@ const counterSlice = createSlice({
   reducers: {
     updateCurrentTime: (state, action: PayloadAction<number>) => {
       if (!state?.current) return;
-      state.current = { ...state!.current, currentTime: action.payload };
+      state.current.currentTime = action.payload;
     },
-    updateSongInfo: (
-      state,
-      action: PayloadAction<
-        | { key: "currentTime"; value: number }
-        | { key: "status"; value: "play" | "pause" }
-      >
-    ) => {
+    updateSongInfo: (state, action: PayloadAction<SongInfoPayload>) => {
       if (!state?.current) return;
-      const { key, value } = action.payload;
-      state.current = { ...state!.current, [key]: value };
+      state.current = Object.assign(state.current, action.payload);
+      // { ...state!.current, ...action.payload };
     },
   },
   extraReducers: {
@@ -77,7 +83,9 @@ const counterSlice = createSlice({
     },
     [getPlayListSongs.fulfilled.type]: (state, action) => {
       const current = action.payload[0];
-      state.current = { ...current, status: "play" };
+      const {dt: duration, id, ar: artists, al: album, name } = action.payload[0];
+      current.status = "play";
+      state.current = { duration, id, artists, name, album, status: "play" };
       state.songs = action.payload;
     },
     [getCurrentDetail.fulfilled.type]: (state, action) => {

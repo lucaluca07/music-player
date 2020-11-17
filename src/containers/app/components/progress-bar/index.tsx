@@ -11,7 +11,7 @@ interface IProps {
 
 const ProcessBar: React.FC<IProps> = ({ style }) => {
   const current = useSelector((state: RootState) => state.song.current);
-  const duration = current?.dt || 1;
+  const duration = current?.duration || 1;
   const currentTime = current?.currentTime || 0;
   return useMemo(
     () => (

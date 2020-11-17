@@ -14,6 +14,7 @@ const Tab: FC<TabProps> = ({ data, style, activeValue, onChange }) => {
     <ul style={style} className="tab">
       {data.map((item) => (
         <li
+          key={item.label}
           onClick={() => onChange(item.value)}
           className={cx("tab-panel", {
             "tab-panel-active": activeValue === item.value,

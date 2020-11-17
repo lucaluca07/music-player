@@ -1,4 +1,4 @@
-import { updateCurrentTime } from "@/reducer/song";
+import { updateSongInfo } from "@/reducer/song";
 import throttle from "@/utils/throttle";
 import { useMemo, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,8 +12,8 @@ const AudioPlayer = () => {
 
   const updateSongTime = useCallback(
     throttle(() => {
-      dispatch(updateCurrentTime(audio.currentTime * 1000));
-    }, 60),
+      dispatch(updateSongInfo({ currentTime: audio.currentTime * 1000 }));
+    }, 32),
     [audio, dispatch]
   );
 
@@ -23,17 +23,19 @@ const AudioPlayer = () => {
   }, [audio, url]);
 
   useEffect(() => {
-    if(current?.status === 'play') {
+    if (current?.status === "play") {
       audio.play();
     }
-    if(current?.status === 'pause') {
+    if (current?.status === "pause") {
       audio.pause();
     }
-  }, [audio, current])
+  }, [audio, current]);
 
   useEffect(() => {
     audio.ontimeupdate = updateSongTime;
-  }, [audio, updateSongTime]);
+    // play next song
+    audio.onended = () => dispatch(updateSongInfo({ status: 'pause' }));
+  }, [audio, dispatch, updateSongTime]);
   return null;
 };
 

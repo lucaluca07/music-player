@@ -13,8 +13,7 @@ const Player: React.FC = () => {
     if (!status) return;
     dispatch(
       updateSongInfo({
-        key: "status",
-        value: status === "play" ? "pause" : "play",
+        status: status === "play" ? "pause" : "play",
       })
     );
   }, [dispatch, status]);
