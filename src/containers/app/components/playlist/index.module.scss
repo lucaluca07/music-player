@@ -10,6 +10,10 @@
   display: flex;
   flex-direction: column;
   padding-top: 20px;
+  transition: all 0.3s;
+  &-hide {
+    right: -430px;
+  }
   .header {
     display: flex;
     justify-content: space-between;

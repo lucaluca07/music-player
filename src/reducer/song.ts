@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import services from "@/service";
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import services from '@/service';
 
 interface Current {
   id: number;
@@ -10,9 +10,12 @@ interface Current {
   url?: string;
   lyric?: any;
   currentTime?: number;
-  status?: "play" | "pause";
+  status?: 'play' | 'pause';
 }
 interface CounterState {
+  ui: {
+    playlistVisible: boolean;
+  };
   songs: Current[];
   current: Current | null;
 }
@@ -30,7 +33,7 @@ type SongInfoPayloads = {
 type SongInfoPayload = SongInfoPayloads[Keys];
 
 export const getRecommedSongs = createAsyncThunk(
-  "song/getRecommedSongs",
+  'song/getRecommedSongs',
   async () => {
     const response = await services.getRecommedSongs();
     return response;
@@ -38,7 +41,7 @@ export const getRecommedSongs = createAsyncThunk(
 );
 
 export const getPlayListSongs = createAsyncThunk(
-  "song/getPlayListSongs",
+  'song/getPlayListSongs',
   async ({ id, s }: { id: number; s?: number }) => {
     const response = await services.getPlaylistDetail({ id, s });
     const songs = await services.getSongDetail({
@@ -49,7 +52,7 @@ export const getPlayListSongs = createAsyncThunk(
 );
 
 export const getCurrentDetail = createAsyncThunk(
-  "song/getCurrentDetail",
+  'song/getCurrentDetail',
   async (id: number) => {
     const [detail, lyric] = await Promise.all([
       services.getSongUrl({ id }), // url
@@ -59,20 +62,28 @@ export const getCurrentDetail = createAsyncThunk(
   }
 );
 
-const initialState: CounterState = { songs: [], current: null };
+const initialState: CounterState = {
+  songs: [],
+  current: null,
+  ui: {
+    playlistVisible: false,
+  },
+};
 
 const counterSlice = createSlice({
-  name: "counter",
+  name: 'counter',
   initialState,
   reducers: {
+    updatePlaylistVisible: (state, action: PayloadAction<boolean>) => {
+      state.ui.playlistVisible = action.payload;
+    },
     updateCurrentTime: (state, action: PayloadAction<number>) => {
       if (!state?.current) return;
       state.current.currentTime = action.payload;
     },
     updateSongInfo: (state, action: PayloadAction<SongInfoPayload>) => {
       if (!state?.current) return;
-      state.current = Object.assign(state.current, action.payload);
-      // { ...state!.current, ...action.payload };
+      state.current = { ...state!.current, ...action.payload };
     },
   },
   extraReducers: {
@@ -83,9 +94,15 @@ const counterSlice = createSlice({
     },
     [getPlayListSongs.fulfilled.type]: (state, action) => {
       const current = action.payload[0];
-      const {dt: duration, id, ar: artists, al: album, name } = action.payload[0];
-      current.status = "play";
-      state.current = { duration, id, artists, name, album, status: "play" };
+      const {
+        dt: duration,
+        id,
+        ar: artists,
+        al: album,
+        name,
+      } = action.payload[0];
+      current.status = 'play';
+      state.current = { duration, id, artists, name, album, status: 'play' };
       state.songs = action.payload;
     },
     [getCurrentDetail.fulfilled.type]: (state, action) => {
@@ -94,5 +111,9 @@ const counterSlice = createSlice({
   },
 });
 
-export const { updateCurrentTime, updateSongInfo } = counterSlice.actions;
+export const {
+  updateCurrentTime,
+  updateSongInfo,
+  updatePlaylistVisible,
+} = counterSlice.actions;
 export default counterSlice.reducer;
