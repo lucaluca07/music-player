@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import classnames from "classnames";
-import Button from "../button";
-import "./index.scss";
-import Icon from "../icon";
-import { IBanner } from "@/service/api/common";
+import React, { useEffect, useState } from 'react';
+import classnames from 'classnames';
+import Button from '../button';
+import './index.scss';
+import Icon from '../icon';
+import { IBanner } from '@/service/api/common';
 
 interface IProps {
   data: IBanner[];
@@ -50,7 +50,7 @@ const getSlideStyle = (i: number, index: number, len: number) => {
   }
   // center
   return {
-    left: "50%",
+    left: '50%',
     transform: `translateX(-50%)`,
     zIndex: 1000,
   };
@@ -62,41 +62,39 @@ const Carousel: React.FC<IProps> = ({ data }) => {
     setTimeout(() => {
       const i = index === data.length - 1 ? 0 : index + 1;
       setIndex(i);
-    }, 2000);
+    }, 5000);
   }, [data.length, index]);
 
   return (
-    <div className="carousel">
-      <ul className="carousel-container">
+    <div className='carousel'>
+      <ul className='carousel-container'>
         {data.map((item, i) => {
           return (
             <li
               style={getSlideStyle(i, index, data.length)}
-              className={classnames("carousel-slide", {
-                "carousel-slide-active": index === i,
+              className={classnames('carousel-slide', {
+                'carousel-slide-active': index === i,
               })}
-              key={item.imageUrl}
-            >
-              <img alt="" src={item.imageUrl} />
+              key={item.imageUrl}>
+              <img alt='' src={item.imageUrl} />
             </li>
           );
         })}
       </ul>
-      <Button className="carousel-button carousel-button-prev">
-        <Icon type="backward" />
+      <Button className='carousel-button carousel-button-prev'>
+        <Icon type='backward' />
       </Button>
-      <Button className="carousel-button carousel-button-next">
-        <Icon type="forward" />
+      <Button className='carousel-button carousel-button-next'>
+        <Icon type='forward' />
       </Button>
-      <ul className="carousel-pagination carousel-pagination-bullets">
+      <ul className='carousel-pagination carousel-pagination-bullets'>
         {data.map((item, i) => {
           return (
             <li
-              className={classnames("carousel-pagination-bullet", {
-                "carousel-pagination-bullet-active": index === i,
+              className={classnames('carousel-pagination-bullet', {
+                'carousel-pagination-bullet-active': index === i,
               })}
-              key={item.imageUrl}
-            ></li>
+              key={item.imageUrl}></li>
           );
         })}
       </ul>
