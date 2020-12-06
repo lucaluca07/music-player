@@ -7,6 +7,7 @@ interface SongTableProps {
   songs: any[];
   className?: string;
   hideHeader?: boolean;
+  onDoubleClick: (id: number) => void;
 }
 
 const columns = [
@@ -29,7 +30,12 @@ const columns = [
   },
 ];
 
-const SongTable: FC<SongTableProps> = ({ songs, className, hideHeader }) => {
+const SongTable: FC<SongTableProps> = ({
+  songs,
+  className,
+  hideHeader,
+  onDoubleClick,
+}) => {
   return (
     <table className={cx('song-table', className)}>
       <thead
@@ -48,7 +54,12 @@ const SongTable: FC<SongTableProps> = ({ songs, className, hideHeader }) => {
             <tr className='table-row' key={song.id}>
               {columns.map((item) => {
                 return (
-                  <td className='table-cell' key={song[item.key]}>
+                  <td
+                    onDoubleClick={() => {
+                      onDoubleClick(song.id);
+                    }}
+                    className='table-cell'
+                    key={song[item.key]}>
                     {item.render?.(song[item.dataIndex]) ??
                       song[item.dataIndex]}
                   </td>

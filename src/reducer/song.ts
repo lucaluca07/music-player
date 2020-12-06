@@ -32,6 +32,25 @@ type SongInfoPayloads = {
 
 type SongInfoPayload = SongInfoPayloads[Keys];
 
+export const playSong = createAsyncThunk(
+  'song/PlaySong',
+  async ({
+    song,
+    status = 'play',
+  }: {
+    song: Current;
+    status?: 'play' | 'pause';
+  }) => {
+    const id = song.id;
+    const [detail, lyric] = await Promise.all([
+      services.getSongUrl({ id }), // url
+      services.getLyric({ id }), // 歌词
+    ]);
+
+    return { ...song, status, url: (detail as any)?.[0]?.url, lyric };
+  }
+);
+
 export const getRecommedSongs = createAsyncThunk(
   'song/getRecommedSongs',
   async () => {
@@ -85,6 +104,9 @@ const counterSlice = createSlice({
       if (!state?.current) return;
       state.current = { ...state!.current, ...action.payload };
     },
+    setCurrentSong: (state, action: PayloadAction<Current>) => {
+      state.current = action.payload;
+    },
   },
   extraReducers: {
     [getRecommedSongs.fulfilled.type]: (state, action) => {
@@ -108,6 +130,9 @@ const counterSlice = createSlice({
     [getCurrentDetail.fulfilled.type]: (state, action) => {
       state.current = { ...state!.current, ...action.payload };
     },
+    [playSong.fulfilled.type]: (state, action) => {
+      state.current = { ...(state?.current || {}), ...action.payload };
+    },
   },
 });
 
@@ -115,5 +140,6 @@ export const {
   updateCurrentTime,
   updateSongInfo,
   updatePlaylistVisible,
+  setCurrentSong,
 } = counterSlice.actions;
 export default counterSlice.reducer;

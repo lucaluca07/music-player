@@ -4,7 +4,7 @@ import cx from 'classnames';
 import Button from '@/components/button';
 import Tab from '@/components/tab';
 import { RootState } from '@/reducer';
-import { updatePlaylistVisible } from '@/reducer/song';
+import { setCurrentSong, updatePlaylistVisible } from '@/reducer/song';
 
 import styles from './index.module.scss';
 import SongTable from '@/components/song-table';
@@ -33,6 +33,13 @@ const Playlist = () => {
     document.addEventListener('click', handleClick);
     return () => document.removeEventListener('click', handleClick);
   }, [dispatch, visible]);
+
+  const handlePlay = (id: number) => {
+    const song = songs.find((item) => item.id === id);
+    if (!song) return;
+    dispatch(setCurrentSong({ ...song, status: 'play' }));
+  };
+
   const len = songs.length;
   return (
     <div
@@ -57,7 +64,9 @@ const Playlist = () => {
         </div>
       </div>
       <div className={styles.list}>
-        {len > 0 && <SongTable hideHeader songs={songs} />}
+        {len > 0 && (
+          <SongTable onDoubleClick={handlePlay} hideHeader songs={songs} />
+        )}
         {len === 0 && (
           <div className={styles.empty}>
             <div>你还没有添加任何歌曲！</div>
